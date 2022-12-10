@@ -38,7 +38,14 @@ flags.DEFINE_boolean('dont_show', False, 'dont show video output')
 flags.DEFINE_boolean('info', False, 'show detailed info of tracked objects')
 flags.DEFINE_boolean('count', False, 'count objects being tracked on screen')
 
-def main(_argv):
+def main(_argv, input = "https://www.youtube.com/watch?v=MbWjqYOLuyU", output = "./outputs/webvideo.avi"):
+    #define from LeeHakho
+    FLAGS.video = input #"https://www.youtube.com/watch?v=MbWjqYOLuyU"  # LeeHakho
+    FLAGS.weights = output #"./checkpoints/yolov4_custom"  # LeeHakho
+    FLAGS.model = "yolov4"  # LeeHakho
+    FLAGS.output = "./outputs/webvideo.avi"  # LeeHakho
+    FLAGS.tiny = True  # LeeHakho
+
     # Definition of the parameters
     max_cosine_distance = 0.4
     nn_budget = None
@@ -101,7 +108,7 @@ def main(_argv):
             print('Video has ended or failed, try a different video format!')
             break
         frame_num +=1
-        print('Frame #: ', frame_num)
+        #print('Frame #: ', frame_num)
         frame_size = frame.shape[:2]
         image_data = cv2.resize(frame, (input_size, input_size))
         image_data = image_data / 255.
@@ -220,12 +227,12 @@ def main(_argv):
 
         # calculate frames per second of running detections
         fps = 1.0 / (time.time() - start_time)
-        print("FPS: %.2f" % fps)
+        #print("FPS: %.2f" % fps)
         result = np.asarray(frame)
         result = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         
-        if not FLAGS.dont_show:
-            cv2.imshow("Output Video", result)
+        #if not FLAGS.dont_show:
+            #cv2.imshow("Output Video", result)
         
         # if output flag is set, save video file
         if FLAGS.output:
