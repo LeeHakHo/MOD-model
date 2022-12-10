@@ -23,27 +23,28 @@ from deep_sort import preprocessing, nn_matching
 from deep_sort.detection import Detection
 from deep_sort.tracker import Tracker
 from tools import generate_detections as gdet
-flags.DEFINE_string('framework', 'tf', '(tf, tflite, trt')
-flags.DEFINE_string('weights', './checkpoints/yolov4-416',
-                    'path to weights file')
-flags.DEFINE_integer('size', 416, 'resize images to')
-flags.DEFINE_boolean('tiny', False, 'yolo or yolo-tiny')
-flags.DEFINE_string('model', 'yolov4', 'yolov3 or yolov4')
-flags.DEFINE_string('video', './data/video/test.mp4', 'path to input video or set to 0 for webcam')
-flags.DEFINE_string('output', None, 'path to output video')
-flags.DEFINE_string('output_format', 'XVID', 'codec used in VideoWriter when saving video to file')
-flags.DEFINE_float('iou', 0.45, 'iou threshold')
-flags.DEFINE_float('score', 0.50, 'score threshold')
-flags.DEFINE_boolean('dont_show', False, 'dont show video output')
-flags.DEFINE_boolean('info', False, 'show detailed info of tracked objects')
-flags.DEFINE_boolean('count', False, 'count objects being tracked on screen')
 
-def main(_argv, input = "https://www.youtube.com/watch?v=MbWjqYOLuyU", output = "./outputs/webvideo.avi"):
+def videoTracker(_argv, input = "http://3.37.87.189:8000/media/video/2022/12/10/48c038a5abe4494897ec520a73636855.mp4", output = "./outputs/webvideo.avi"):
+    flags.DEFINE_string('framework', 'tf', '(tf, tflite, trt')
+    flags.DEFINE_string('weights', './checkpoints/yolov4-416',
+                        'path to weights file')
+    flags.DEFINE_integer('size', 416, 'resize images to')
+    flags.DEFINE_boolean('tiny', False, 'yolo or yolo-tiny')
+    flags.DEFINE_string('model', 'yolov4', 'yolov3 or yolov4')
+    flags.DEFINE_string('video', './data/video/test.mp4', 'path to input video or set to 0 for webcam')
+    flags.DEFINE_string('output', None, 'path to output video')
+    flags.DEFINE_string('output_format', 'XVID', 'codec used in VideoWriter when saving video to file')
+    flags.DEFINE_float('iou', 0.45, 'iou threshold')
+    flags.DEFINE_float('score', 0.50, 'score threshold')
+    flags.DEFINE_boolean('dont_show', False, 'dont show video output')
+    flags.DEFINE_boolean('info', False, 'show detailed info of tracked objects')
+    flags.DEFINE_boolean('count', False, 'count objects being tracked on screen')
+
     #define from LeeHakho
-    FLAGS.video = input #"https://www.youtube.com/watch?v=MbWjqYOLuyU"  # LeeHakho
-    FLAGS.weights = output #"./checkpoints/yolov4_custom"  # LeeHakho
+    FLAGS.video = input #"./data/video/lostTest.mp4"  # LeeHakho
+    FLAGS.weights = "./checkpoints/yolov4_custom"  # LeeHakho
     FLAGS.model = "yolov4"  # LeeHakho
-    FLAGS.output = "./outputs/webvideo.avi"  # LeeHakho
+    FLAGS.output = output #"./outputs/webvideo.avi"  # LeeHakho
     FLAGS.tiny = True  # LeeHakho
 
     # Definition of the parameters
@@ -240,8 +241,11 @@ def main(_argv, input = "https://www.youtube.com/watch?v=MbWjqYOLuyU", output = 
         if cv2.waitKey(1) & 0xFF == ord('q'): break
     cv2.destroyAllWindows()
 
-if __name__ == '__main__':
-    try:
-        app.run(main)
-    except SystemExit:
-        pass
+#if __name__ == '__main__':
+#    try:
+#        app.run(main)
+#    except SystemExit:
+#        pass
+
+app.run(videoTracker)
+
