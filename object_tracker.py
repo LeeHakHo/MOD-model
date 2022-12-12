@@ -26,7 +26,7 @@ from tools import generate_detections as gdet
 
 def videoTracker(_argv, input = "http://3.37.87.189:8000/media/video/2022/12/10/48c038a5abe4494897ec520a73636855.mp4", output = "./outputs/webvideo.avi"):
     flags.DEFINE_string('framework', 'tf', '(tf, tflite, trt')
-    flags.DEFINE_string('weights', './checkpoints/yolov4-416',
+    flags.DEFINE_string('weights', './checkpoints/yolov4-custom',
                         'path to weights file')
     flags.DEFINE_integer('size', 416, 'resize images to')
     flags.DEFINE_boolean('tiny', False, 'yolo or yolo-tiny')
